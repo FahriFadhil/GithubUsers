@@ -9,7 +9,8 @@ import com.fahri.githubusers.DetailUserActivity
 import com.fahri.githubusers.data.User
 import com.fahri.githubusers.databinding.RowItemUserBinding
 
-class UserAdapter(private val userList : List<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(private val userList: List<User>) :
+    RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     inner class UserViewHolder(
         val binding: RowItemUserBinding,
         private val listener: (Int) -> Unit
@@ -21,14 +22,17 @@ class UserAdapter(private val userList : List<User>) : RecyclerView.Adapter<User
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder = UserViewHolder(
-        RowItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-        { i ->
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder =
+        UserViewHolder(
+            RowItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ) { i ->
             parent.context.startActivity(
-                Intent(parent.context, DetailUserActivity::class.java).putExtra(DetailUserActivity.USER_KEY, userList[i])
+                Intent(
+                    parent.context,
+                    DetailUserActivity::class.java
+                ).putExtra(DetailUserActivity.USER_KEY, userList[i])
             )
         }
-    )
 
     override fun onBindViewHolder(holder: UserViewHolder, i: Int) {
         val data = userList[i]
